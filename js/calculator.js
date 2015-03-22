@@ -30,7 +30,7 @@ Calculator.prototype = {
     division: function() {
         this.calculate();
         this.operation = function(a, b) {
-            Big(a).div(b)
+            return Big(a).div(b);
         };
         this.float = 0;
     },
@@ -62,6 +62,7 @@ Calculator.prototype = {
     },
     digit: function(number) {
         if (this.float) {
+			
 			this.setOperandB(Big(this.operandB).plus(number / Math.pow(10, this.float)));
             this.float = this.float + 1;
 		} else {           
