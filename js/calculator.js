@@ -9,28 +9,28 @@ Calculator.prototype = {
     addition: function() {
         this.calculate();
         this.operation = function(a, b) {
-            return a + b;
+            return Big(a).plus(b);
         };
         this.float = 0;
     },
     subtraction: function() {
         this.calculate();
         this.operation = function(a, b) {
-            return a - b;
+            return Big(a).minus(b);
         };
         this.float = 0; 
     },
     multiplication: function() {
         this.calculate();
         this.operation = function(a, b) {
-            return a * b;
+            return Big(a).times(b);
         };
         this.float = 0; 
     },
     division: function() {
         this.calculate();
         this.operation = function(a, b) {
-            return a / b;
+            Big(a).div(b)
         };
         this.float = 0;
     },
@@ -61,10 +61,8 @@ Calculator.prototype = {
         this.updateDisplay(this.operandA);
     },
     digit: function(number) {
-        if (this.float) { 
-			var precision = this.operandB + (number / Math.pow(10, this.float));
-			var result = Math.round(precision*(Math.pow(10, this.float)))/Math.pow(10, this.float); 
-            this.setOperandB(result);
+        if (this.float) {
+			this.setOperandB(Big(this.operandB).plus(number / Math.pow(10, this.float)));
             this.float = this.float + 1;
 		} else {           
             this.setOperandB((this.operandB * 10) + number);
