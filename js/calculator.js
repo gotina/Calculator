@@ -64,8 +64,10 @@ Calculator.prototype = {
     },
     digit: function(number) {
         if (this.float) {
-            this.setOperandB(this.operandB + (number / Math.pow(10, this.float)));
-            this.float = this.float + 1
+			var precision = this.operandB + (number / Math.pow(10, this.float));
+			var result = Math.round(precision*(Math.pow(10, this.float)))/Math.pow(10, this.float); 
+            this.setOperandB(result);
+            this.float = this.float + 1;
 		} else {            
             this.setOperandB((this.operandB * 10) + number);
         };
