@@ -42,7 +42,6 @@ Calculator.prototype = {
         this.clearCurrent();
         this.operandA = 0;
         this.operation = null;
-        console.log("operandA: " + this.operandA);
         this.float = 0; 
     },
     calculate: function() {
@@ -54,7 +53,6 @@ Calculator.prototype = {
 			}
             	this.operandA = this.operandB;
         }
-        console.log("operandA: " + this.operandA);
 		this.setOperandB(0, this.operandA);
 		this.operation = null;
     },
@@ -63,12 +61,12 @@ Calculator.prototype = {
         this.updateDisplay(this.operandA);
     },
     digit: function(number) {
-        if (this.float) {
+        if (this.float) { 
 			var precision = this.operandB + (number / Math.pow(10, this.float));
 			var result = Math.round(precision*(Math.pow(10, this.float)))/Math.pow(10, this.float); 
             this.setOperandB(result);
             this.float = this.float + 1;
-		} else {            
+		} else {           
             this.setOperandB((this.operandB * 10) + number);
         };
     
@@ -86,7 +84,6 @@ Calculator.prototype = {
     setOperandB: function(value, text) {
         this.operandB = value;
         this.updateDisplay(typeof text == "undefined" ? this.operandB : text);
-        console.log("operandB: " + this.operandB);
     },
     updateDisplay: function(value) {
         $("#display").text(value);
